@@ -26,6 +26,7 @@ namespace blackjackGame.Classes
         public int Value
         {
             get { return value; }
+            set { this.value = value; }
         }
         public string Name 
         { 

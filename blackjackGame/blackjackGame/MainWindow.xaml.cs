@@ -22,24 +22,53 @@ namespace blackjackGame
         public MainWindow()
         {
             InitializeComponent();
+            hitButton.IsEnabled = false;
+            standButton.IsEnabled = false;
+
         }
 
         private void startButton_Click(object sender, RoutedEventArgs e)
         {
-            //card.CreateCard();
-            //gameResultTextBlock.Text = card.ToString();
+            hitButton.IsEnabled = true;
+            standButton.IsEnabled = true;
+            startButton.IsEnabled = false;
         }
 
         private void hitButton_Click(object sender, RoutedEventArgs e)
         {
             card.CreateCard();
-            //if (card.Value == 0)
-            //{
-            //    MessageBoxOptions.
-            //}
+            //Check if card is an ace
+            if (card.Value == 0)
+            {
+                MessageBoxResult result = MessageBox.Show($"You have drawn an {card.ToString()}. " +
+                    $"Do you want to set the ace value to 11?\n(If not, the value will be set to 1)",
+                    "Ace value", MessageBoxButton.YesNo,MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    card.Value = 11;
+                }
+                else
+                {
+                    card.Value = 1;
+                }
+            }
             playerScore += card.Value;
             playerScoreLabel.Content = Convert.ToString(playerScore);
             playerCardsListBox.Items.Add(card.ToString());
+            CheckScore(playerScore);
+        }
+
+        private void CheckScore(int score)
+        {
+            if (score > 21)
+            {
+                gameResultTextBlock.Text = "YOU LOSE";
+            }
+        }
+
+        private void quitButton_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
         }
     }
 }

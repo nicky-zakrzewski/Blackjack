@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Blackjack" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        <ListBox x:Name="playerCardsListBox" Margin="10,44,673,250"/>
-        <ListBox x:Name="dealerCardsListBox" Margin="673,44,10,250"/>
+        <ListBox x:Name="playerCardsListBox" Margin="10,44,640,250"/>
+        <ListBox x:Name="dealerCardsListBox" Margin="640,49,10,245"/>
         <Label x:Name="staticPlayerLabel" Content="Player" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" Width="117"/>
         <Label x:Name="staticDealerLabel" Content="Dealer" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="673,18,0,0" VerticalAlignment="Top" Width="117"/>
         <TextBlock x:Name="gameResultTextBlock" HorizontalAlignment="Center" Margin="0,23,0,0" TextWrapping="Wrap" Text="You win/You lose" VerticalAlignment="Top"/>
@@ -19,7 +19,7 @@
         <Button x:Name="startButton" Content="Start" Width="76" HorizontalAlignment="Center" VerticalAlignment="Center" Click="startButton_Click"/>
         <Button x:Name="hitButton" Content="Hit" Width="76" HorizontalAlignment="Center" Margin="0,232,0,0" VerticalAlignment="Top" Click="hitButton_Click"/>
         <Button x:Name="standButton" Content="Stand" Width="76" HorizontalAlignment="Center" Margin="0,257,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="quitButton" Content="Quit" Width="76" HorizontalAlignment="Center" Margin="0,282,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="quitButton" Content="Quit" Width="76" HorizontalAlignment="Center" Margin="0,282,0,0" VerticalAlignment="Top" Click="quitButton_Click"/>
 
     </Grid>
 </Window>

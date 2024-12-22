@@ -87,6 +87,11 @@ namespace blackjackGame.Classes
             return $"{Name} of {Suit}";
         }
 
+        public void ClearUsedCards()
+        {
+            usedCards.Clear();
+        }
+
         private bool CheckAvailability(string card)
         {
             if (usedCards.Contains(card))

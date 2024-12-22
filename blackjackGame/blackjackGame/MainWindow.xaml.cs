@@ -18,7 +18,7 @@ namespace blackjackGame
     public partial class MainWindow : Window
     {
         private int playerScore = 0, dealerScore = 0;
-
+        private Card card = new Card();
         public MainWindow()
         {
             InitializeComponent();
@@ -38,11 +38,11 @@ namespace blackjackGame
             dealerScore = 0;
             playerScoreLabel.Content = playerScore.ToString();
             dealerScorelabel.Content = dealerScore.ToString();
+            card.ClearUsedCards();
         }
 
         private void hitButton_Click(object sender, RoutedEventArgs e)
         {
-            Card card = new Card();
             card.CreateCard();
             //Check if card is an ace
             if (card.Value == 0)
@@ -62,17 +62,84 @@ namespace blackjackGame
             playerScore += card.Value;
             playerScoreLabel.Content = Convert.ToString(playerScore);
             playerCardsListBox.Items.Add(card.ToString());
-            CheckScore(playerScore);
+            if (IsScoreAbove21(playerScore))
+            {
+                PlayerLostGame();
+            }
+            
         }
 
-        private void CheckScore(int score)
+        private bool IsScoreAbove21(int score)
         {
             if (score > 21)
             {
-                gameResultTextBlock.Text = "YOU LOSE";
-                hitButton.IsEnabled = false;
-                standButton.IsEnabled = false;
-                startButton.IsEnabled=true;
+                return true;
+            }
+            else { return false; }
+        }
+
+        private void PlayerLostGame()
+        {
+            gameResultTextBlock.Text = "YOU LOSE...";
+            hitButton.IsEnabled = false;
+            standButton.IsEnabled = false;
+            startButton.IsEnabled = true;
+        }
+
+        private void PlayerWonGame()
+        {
+            gameResultTextBlock.Text = "YOU WIN!";
+            hitButton.IsEnabled = false;
+            standButton.IsEnabled = false;
+            startButton.IsEnabled = true;
+        }
+
+        private void GameEndsInTie()
+        {
+            gameResultTextBlock.Text = "IT'S A TIE";
+            hitButton.IsEnabled = false;
+            standButton.IsEnabled = false;
+            startButton.IsEnabled = true;
+        }
+
+        private void standButton_Click(object sender, RoutedEventArgs e)
+        {
+            hitButton.IsEnabled = false;
+
+            while (dealerScore <17)
+            {
+                card.CreateCard();
+                if (card.Value == 0)
+                {
+                    if(dealerScore + 11 <= 21)
+                    {
+                        card.Value = 11;
+                    }
+                    else
+                    {
+                        card.Value = 1;
+                    }
+                }
+                dealerScore += card.Value;
+                dealerScorelabel.Content = Convert.ToString(dealerScore);
+                dealerCardsListBox.Items.Add(card.ToString());
+
+            }
+            if (IsScoreAbove21(dealerScore))
+            {
+                PlayerWonGame();
+            }
+            else if (dealerScore < playerScore)
+            {
+                PlayerWonGame();
+            }
+            else if (dealerScore == playerScore)
+            {
+                GameEndsInTie();
+            }
+            else
+            {
+                PlayerLostGame();
             }
         }
 

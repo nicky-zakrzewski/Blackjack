@@ -18,7 +18,7 @@
         <Label x:Name="dealerScorelabel" Content="0" HorizontalAlignment="Left" Margin="690,189,0,0" VerticalAlignment="Top"/>
         <Button x:Name="startButton" Content="Start" Width="76" HorizontalAlignment="Center" VerticalAlignment="Center" Click="startButton_Click"/>
         <Button x:Name="hitButton" Content="Hit" Width="76" HorizontalAlignment="Center" Margin="0,232,0,0" VerticalAlignment="Top" Click="hitButton_Click"/>
-        <Button x:Name="standButton" Content="Stand" Width="76" HorizontalAlignment="Center" Margin="0,257,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="standButton" Content="Stand" Width="76" HorizontalAlignment="Center" Margin="0,257,0,0" VerticalAlignment="Top" Click="standButton_Click"/>
         <Button x:Name="quitButton" Content="Quit" Width="76" HorizontalAlignment="Center" Margin="0,282,0,0" VerticalAlignment="Top" Click="quitButton_Click"/>
 
     </Grid>

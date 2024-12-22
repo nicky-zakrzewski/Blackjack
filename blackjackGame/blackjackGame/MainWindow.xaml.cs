@@ -37,7 +37,6 @@ namespace blackjackGame
 
         private void startButton_Click(object sender, RoutedEventArgs e)
         {
-            hitButton.IsEnabled = true;
             standButton.IsEnabled = true;
             twentyButton.IsEnabled = true;
             fiftyButton.IsEnabled = true;
@@ -112,18 +111,24 @@ namespace blackjackGame
             standButton.IsEnabled = false;
             startButton.IsEnabled = true;
             UpdateUI();
+            if (bankroll.Balance == 0)
+            {
+                MessageBox.Show("You do not have enough credit to continue playing. \nThe game will be reset", "Not enough credit", MessageBoxButton.OK, MessageBoxImage.Warning);
+                bankroll.Balance = 500;
+            }
         }
 
         private void PlayerWonGame()
         {
-            gameResultTextBlock.Text = "YOU WIN!";
             double wonAmount = pool.Amount;
             if(playerScore == 21)
             {
+                gameResultTextBlock.Text = "BLACKJACK!";
                 bankroll.AddToBalance(wonAmount*2.5);
             }
             else
             {
+                gameResultTextBlock.Text = "YOU WIN!";
                 bankroll.AddToBalance(wonAmount * 2);
             }
             pool.Amount = 0;
@@ -189,6 +194,7 @@ namespace blackjackGame
                 bankroll.RemoveFromBalance(20);
                 pool.AddToBalance(20);
                 UpdateUI();
+                hitButton.IsEnabled = true;
             }
             else
             {
@@ -203,6 +209,7 @@ namespace blackjackGame
                 bankroll.RemoveFromBalance(50);
                 pool.AddToBalance(50);
                 UpdateUI();
+                hitButton.IsEnabled = true;
             }
             else
             {
@@ -217,6 +224,7 @@ namespace blackjackGame
                 bankroll.RemoveFromBalance(100);
                 pool.AddToBalance(100);
                 UpdateUI();
+                hitButton.IsEnabled = true;
             }
             else
             {
@@ -231,6 +239,7 @@ namespace blackjackGame
                 bankroll.RemoveFromBalance(200);
                 pool.AddToBalance(200);
                 UpdateUI();
+                hitButton.IsEnabled = true;
             }
             else
             {
@@ -246,6 +255,7 @@ namespace blackjackGame
                 bankroll.RemoveFromBalance(customAmount);
                 pool.AddToBalance(customAmount);
                 UpdateUI();
+                hitButton.IsEnabled = true;
             }
             else
             {
@@ -264,6 +274,13 @@ namespace blackjackGame
             poolAmountTextBox.Text = pool.ToString();
             playerScoreLabel.Content = playerScore;
             dealerScorelabel.Content = dealerScore;
+        }
+
+        private void resetButton_Click(object sender, RoutedEventArgs e)
+        {
+            bankroll.Balance = 500;
+            pool.Amount = 0;
+            UpdateUI();
         }
 
         private bool CheckIfBankrollIsSufficient(double amount)

@@ -19,7 +19,7 @@
         <Button x:Name="startButton" Content="Start" Width="76" HorizontalAlignment="Center" VerticalAlignment="Center" Click="startButton_Click"/>
         <Button x:Name="hitButton" Content="Hit" Width="76" HorizontalAlignment="Center" Margin="0,232,0,0" VerticalAlignment="Top" Click="hitButton_Click"/>
         <Button x:Name="standButton" Content="Stand" Width="76" HorizontalAlignment="Center" Margin="0,257,0,0" VerticalAlignment="Top" Click="standButton_Click"/>
-        <Button x:Name="quitButton" Content="Quit" Width="76" HorizontalAlignment="Center" Margin="0,282,0,0" VerticalAlignment="Top" Click="quitButton_Click"/>
+        <Button x:Name="quitButton" Content="Quit" Width="76" HorizontalAlignment="Center" Margin="0,307,0,0" VerticalAlignment="Top" Click="quitButton_Click"/>
         <Label x:Name="staticBankrollLabel" Content="Bankroll :" HorizontalAlignment="Left" Margin="10,224,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="bankrollTextBox" HorizontalAlignment="Left" Margin="110,228,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="93" IsEnabled="False"/>
         <Label x:Name="amountToBetStaticLabel" Content="Amount to bet :" HorizontalAlignment="Left" Margin="10,255,0,0" VerticalAlignment="Top"/>
@@ -32,6 +32,7 @@
         <Button x:Name="placeCustomBetButton" Content="Place Bet" Width="75" HorizontalAlignment="Left" Margin="208,357,0,0" VerticalAlignment="Top" Click="placeCustomBetButton_Click"/>
         <Label x:Name="poolAmountstaticLabel" Content="Money in the pool :" HorizontalAlignment="Center" Margin="0,82,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="poolAmountTextBox" TextAlignment="Center" HorizontalAlignment="Center" Margin="0,105,0,0" TextWrapping="Wrap" IsEnabled="False" VerticalAlignment="Top" Width="113"/>
-        
+        <Button x:Name="resetButton" Content="Reset" HorizontalAlignment="Center" Margin="0,282,0,0" VerticalAlignment="Top" Width="76" Click="resetButton_Click"/>
+
     </Grid>
 </Window>

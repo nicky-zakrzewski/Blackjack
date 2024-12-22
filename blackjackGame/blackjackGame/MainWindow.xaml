@@ -9,13 +9,13 @@
     <Grid>
         <ListBox x:Name="playerCardsListBox" Margin="10,44,640,250"/>
         <ListBox x:Name="dealerCardsListBox" Margin="640,49,10,245"/>
-        <Label x:Name="staticPlayerLabel" Content="Player" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" Width="117"/>
-        <Label x:Name="staticDealerLabel" Content="Dealer" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="673,18,0,0" VerticalAlignment="Top" Width="117"/>
+        <Label x:Name="staticPlayerLabel" Content="Player" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" Width="150"/>
+        <Label x:Name="staticDealerLabel" Content="Dealer" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="640,18,0,0" VerticalAlignment="Top" Width="150"/>
         <TextBlock x:Name="gameResultTextBlock" HorizontalAlignment="Center" Margin="0,23,0,0" TextWrapping="Wrap" Text="You win/You lose" VerticalAlignment="Top"/>
         <Label x:Name="staticPlayerScoreLabel" Content="Score :" HorizontalAlignment="Left" Margin="10,189,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="staticDealerScoreLabel" Content="Score :" HorizontalAlignment="Left" Margin="673,189,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="staticDealerScoreLabel" Content="Score :" HorizontalAlignment="Left" Margin="640,189,0,0" VerticalAlignment="Top"/>
         <Label x:Name="playerScoreLabel" Content="0" HorizontalAlignment="Left" Margin="60,189,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="dealerScorelabel" Content="0" HorizontalAlignment="Left" Margin="723,189,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="dealerScorelabel" Content="0" HorizontalAlignment="Left" Margin="690,189,0,0" VerticalAlignment="Top"/>
         <Button x:Name="startButton" Content="Start" Width="76" HorizontalAlignment="Center" VerticalAlignment="Center" Click="startButton_Click"/>
         <Button x:Name="hitButton" Content="Hit" Width="76" HorizontalAlignment="Center" Margin="0,232,0,0" VerticalAlignment="Top" Click="hitButton_Click"/>
         <Button x:Name="standButton" Content="Stand" Width="76" HorizontalAlignment="Center" Margin="0,257,0,0" VerticalAlignment="Top"/>

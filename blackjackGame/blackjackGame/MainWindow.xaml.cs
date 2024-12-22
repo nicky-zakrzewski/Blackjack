@@ -17,8 +17,8 @@ namespace blackjackGame
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Card card = new Card();
-        private int playerScore = 0;
+        private int playerScore = 0, dealerScore = 0;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -32,10 +32,17 @@ namespace blackjackGame
             hitButton.IsEnabled = true;
             standButton.IsEnabled = true;
             startButton.IsEnabled = false;
+            playerCardsListBox.Items.Clear();
+            dealerCardsListBox.Items.Clear();
+            playerScore = 0;
+            dealerScore = 0;
+            playerScoreLabel.Content = playerScore.ToString();
+            dealerScorelabel.Content = dealerScore.ToString();
         }
 
         private void hitButton_Click(object sender, RoutedEventArgs e)
         {
+            Card card = new Card();
             card.CreateCard();
             //Check if card is an ace
             if (card.Value == 0)
@@ -63,6 +70,9 @@ namespace blackjackGame
             if (score > 21)
             {
                 gameResultTextBlock.Text = "YOU LOSE";
+                hitButton.IsEnabled = false;
+                standButton.IsEnabled = false;
+                startButton.IsEnabled=true;
             }
         }
 

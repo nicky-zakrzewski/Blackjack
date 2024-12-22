@@ -280,6 +280,12 @@ namespace blackjackGame
         {
             bankroll.Balance = 500;
             pool.Amount = 0;
+            playerScore = 0;
+            dealerScore = 0;
+            dealerCardsListBox.Items.Clear();
+            playerCardsListBox.Items.Clear();
+            poolAmountTextBox.Text = string.Empty;
+            gameResultTextBlock.Text = string.Empty;
             UpdateUI();
         }
 

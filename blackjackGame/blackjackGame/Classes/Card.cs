@@ -11,19 +11,7 @@ namespace blackjackGame.Classes
         private string suit;
         private int value;
         private string name;
-
-        enum CardValues
-        {
-            Ace,
-            Two,
-            Three,
-            Four,
-            Five,
-            Six,
-            Seven,
-
-
-        }
+        private List<String> usedCards = new List<string>();
 
         public Card()
         {
@@ -68,7 +56,7 @@ namespace blackjackGame.Classes
             switch (cardValue)
             {
                 case 1:
-                    value = 11;
+                    value = 0;
                     name = "Ace";
                     break;
                 case 11:
@@ -87,6 +75,27 @@ namespace blackjackGame.Classes
                     value = cardValue;
                     name = Convert.ToString(cardValue);
                     break;
+            }
+            if(CheckAvailability($"{Name} of {Suit}") == false)
+            {
+                CreateCard();
+            }
+        }
+        public override string ToString()
+        {
+            return $"{Name} of {Suit}";
+        }
+
+        private bool CheckAvailability(string card)
+        {
+            if (usedCards.Contains(card))
+            {
+                return false;
+            }
+            else
+            {
+                usedCards.Add(card);
+                return true;
             }
         }
     }

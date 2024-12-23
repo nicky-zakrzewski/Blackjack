@@ -37,7 +37,7 @@ namespace blackjackGame
 
         private void startButton_Click(object sender, RoutedEventArgs e)
         {
-            standButton.IsEnabled = true;
+            //standButton.IsEnabled = true;
             twentyButton.IsEnabled = true;
             fiftyButton.IsEnabled = true;
             hundredButton.IsEnabled = true;
@@ -194,7 +194,6 @@ namespace blackjackGame
                 bankroll.RemoveFromBalance(20);
                 pool.AddToBalance(20);
                 UpdateUI();
-                hitButton.IsEnabled = true;
             }
             else
             {
@@ -209,7 +208,6 @@ namespace blackjackGame
                 bankroll.RemoveFromBalance(50);
                 pool.AddToBalance(50);
                 UpdateUI();
-                hitButton.IsEnabled = true;
             }
             else
             {
@@ -224,7 +222,6 @@ namespace blackjackGame
                 bankroll.RemoveFromBalance(100);
                 pool.AddToBalance(100);
                 UpdateUI();
-                hitButton.IsEnabled = true;
             }
             else
             {
@@ -239,7 +236,6 @@ namespace blackjackGame
                 bankroll.RemoveFromBalance(200);
                 pool.AddToBalance(200);
                 UpdateUI();
-                hitButton.IsEnabled = true;
             }
             else
             {
@@ -249,18 +245,38 @@ namespace blackjackGame
 
         private void placeCustomBetButton_Click(object sender, RoutedEventArgs e)
         {
-            double customAmount = Convert.ToDouble(customBetAmountTextBox.Text);
-            if (CheckIfBankrollIsSufficient(customAmount))
+            try
             {
-                bankroll.RemoveFromBalance(customAmount);
-                pool.AddToBalance(customAmount);
-                UpdateUI();
-                hitButton.IsEnabled = true;
+                string input = customBetAmountTextBox.Text;
+                if (string.IsNullOrEmpty(input))
+                {
+                    UpdateUI();
+                    hitButton.IsEnabled = true;
+                    standButton.IsEnabled = true;
+                }
+                else
+                {
+                    double customAmount = Convert.ToDouble(input);
+                    if (CheckIfBankrollIsSufficient(customAmount))
+                    {
+                        bankroll.RemoveFromBalance(customAmount);
+                        pool.AddToBalance(customAmount);
+                        UpdateUI();
+                        hitButton.IsEnabled = true;
+                        standButton.IsEnabled = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("You have insufficient credits in your bankroll!", "Insufficient bankroll", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    }
+                }
             }
-            else
+            catch (Exception error)
             {
-                MessageBox.Show("You have insufficient credits in your bankroll!", "Insufficient bankroll", MessageBoxButton.OK,MessageBoxImage.Exclamation);
+
+                MessageBox.Show(error.Message);
             }
+           
         }
 
         private void quitButton_Click(object sender, RoutedEventArgs e)

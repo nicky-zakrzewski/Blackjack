@@ -33,6 +33,20 @@
         <Label x:Name="poolAmountstaticLabel" Content="Money in the pool :" HorizontalAlignment="Center" Margin="0,82,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="poolAmountTextBox" TextAlignment="Center" HorizontalAlignment="Center" Margin="0,105,0,0" TextWrapping="Wrap" IsEnabled="False" VerticalAlignment="Top" Width="113"/>
         <Button x:Name="resetButton" Content="Reset" HorizontalAlignment="Center" Margin="0,222,0,0" VerticalAlignment="Top" Width="76" Click="resetButton_Click"/>
+        <Label x:Name="packsStaticLabel" Content="Difficulty" HorizontalAlignment="Left" Margin="454,144,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Slider x:Name="difficultySlider" Minimum="1" Maximum="3"   TickFrequency="1" IsSnapToTickEnabled="True" Orientation="Vertical" HorizontalAlignment="Left" Margin="463,178,0,0" VerticalAlignment="Top" Width="19" Height="71" RenderTransformOrigin="0.5,0.5">
+            <Slider.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="179.779"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Slider.RenderTransform>
+        </Slider>
+        <Label x:Name="easyStaticLabel" Content="Easy" HorizontalAlignment="Left" Margin="489,169,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="difficultStaticLabel" Content="Hard" HorizontalAlignment="Left" Margin="489,228,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="mediumStaticLabel" Content="Medium" HorizontalAlignment="Left" Margin="489,200,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

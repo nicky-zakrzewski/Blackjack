@@ -5,34 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:blackjackGame"
         mc:Ignorable="d"
-        Title="Blackjack" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Blackjack" Height="400" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        <ListBox x:Name="playerCardsListBox" IsEnabled="False" Margin="10,44,640,250"/>
-        <ListBox x:Name="dealerCardsListBox" IsEnabled="False" Margin="640,49,10,245"/>
-        <Label x:Name="staticPlayerLabel" Content="Player" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" Width="150"/>
-        <Label x:Name="staticDealerLabel" Content="Dealer" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="640,18,0,0" VerticalAlignment="Top" Width="150"/>
-        <TextBlock x:Name="gameResultTextBlock" HorizontalAlignment="Center" Margin="0,23,0,0" TextWrapping="Wrap" Text="You win/You lose" VerticalAlignment="Top"/>
-        <Label x:Name="staticPlayerScoreLabel" Content="Score :" HorizontalAlignment="Left" Margin="10,189,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="staticDealerScoreLabel" Content="Score :" HorizontalAlignment="Left" Margin="640,189,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="playerCardsListBox" IsEnabled="False" Margin="10,44,640,192"/>
+        <ListBox x:Name="dealerCardsListBox" IsEnabled="False" Margin="640,49,10,192"/>
+        <Label x:Name="staticPlayerLabel" Content="Player" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" Width="150" FontWeight="Bold"/>
+        <Label x:Name="staticDealerLabel" Content="Dealer" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="640,18,0,0" VerticalAlignment="Top" Width="150" FontWeight="Bold"/>
+        <TextBlock x:Name="gameResultTextBlock" HorizontalAlignment="Center" Margin="0,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontWeight="Bold" FontSize="24"/>
+        <Label x:Name="staticPlayerScoreLabel" Content="Score :" HorizontalAlignment="Left" Margin="10,189,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="staticDealerScoreLabel" Content="Score :" HorizontalAlignment="Left" Margin="640,189,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label x:Name="playerScoreLabel" Content="0" HorizontalAlignment="Left" Margin="60,189,0,0" VerticalAlignment="Top"/>
         <Label x:Name="dealerScorelabel" Content="0" HorizontalAlignment="Left" Margin="690,189,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="startButton" Content="Start" Width="76" HorizontalAlignment="Center" VerticalAlignment="Center" Click="startButton_Click"/>
-        <Button x:Name="hitButton" Content="Hit" Width="76" HorizontalAlignment="Center" Margin="0,232,0,0" VerticalAlignment="Top" Click="hitButton_Click"/>
-        <Button x:Name="standButton" Content="Stand" Width="76" HorizontalAlignment="Center" Margin="0,257,0,0" VerticalAlignment="Top" Click="standButton_Click"/>
-        <Button x:Name="quitButton" Content="Quit" Width="76" HorizontalAlignment="Center" Margin="0,307,0,0" VerticalAlignment="Top" Click="quitButton_Click"/>
+        <Button x:Name="startButton" Content="Play" Width="76" HorizontalAlignment="Center" VerticalAlignment="Top" Click="startButton_Click" Margin="0,147,0,0"/>
+        <Button x:Name="hitButton" Content="Hit" Width="76" HorizontalAlignment="Center" Margin="0,172,0,0" VerticalAlignment="Top" Click="hitButton_Click"/>
+        <Button x:Name="standButton" Content="Stand" Width="76" HorizontalAlignment="Center" Margin="0,197,0,0" VerticalAlignment="Top" Click="standButton_Click"/>
+        <Button x:Name="quitButton" Content="Quit" Width="76" HorizontalAlignment="Center" Margin="0,246,0,0" VerticalAlignment="Top" Click="quitButton_Click"/>
         <Label x:Name="staticBankrollLabel" Content="Bankroll :" HorizontalAlignment="Left" Margin="10,224,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="bankrollTextBox" HorizontalAlignment="Left" Margin="110,228,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="93" IsEnabled="False"/>
-        <Label x:Name="amountToBetStaticLabel" Content="Amount to bet :" HorizontalAlignment="Left" Margin="10,255,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="twentyButton" Content="$20" HorizontalAlignment="Left" Margin="109,258,0,0" VerticalAlignment="Top" Width="94" Click="twentyButton_Click"/>
-        <Button x:Name="fiftyButton" Content="$50" HorizontalAlignment="Left" Margin="109,283,0,0" VerticalAlignment="Top" Width="94" Click="fiftyButton_Click"/>
-        <Button x:Name="hundredButton" Content="$100" HorizontalAlignment="Left" Margin="109,308,0,0" VerticalAlignment="Top" Width="94" Click="hundredButton_Click"/>
-        <Button x:Name="twoHundredButton" Content="$200" HorizontalAlignment="Left" Margin="110,333,0,0" VerticalAlignment="Top" Width="94" Click="twoHundredButton_Click"/>
-        <Label x:Name="customBetStaticLabel" Content="Custom :" HorizontalAlignment="Left" Margin="10,354,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="customBetAmountTextBox" HorizontalAlignment="Left" Margin="110,358,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="93"/>
-        <Button x:Name="placeCustomBetButton" Content="Place Bet" Width="75" HorizontalAlignment="Left" Margin="208,357,0,0" VerticalAlignment="Top" Click="placeCustomBetButton_Click"/>
+        <Label x:Name="amountToBetStaticLabel" Content="Amount to bet :" HorizontalAlignment="Left" Margin="10,290,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="twentyButton" Content="$20" HorizontalAlignment="Left" Margin="110,293,0,0" VerticalAlignment="Top" Width="94" Click="twentyButton_Click"/>
+        <Button x:Name="fiftyButton" Content="$50" HorizontalAlignment="Left" Margin="209,293,0,0" VerticalAlignment="Top" Width="94" Click="fiftyButton_Click"/>
+        <Button x:Name="hundredButton" Content="$100" HorizontalAlignment="Left" Margin="308,293,0,0" VerticalAlignment="Top" Width="94" Click="hundredButton_Click"/>
+        <Button x:Name="twoHundredButton" Content="$200" HorizontalAlignment="Left" Margin="407,293,0,0" VerticalAlignment="Top" Width="94" Click="twoHundredButton_Click"/>
+        <Label x:Name="customBetStaticLabel" Content="Custom :" HorizontalAlignment="Left" Margin="47,310,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="customBetAmountTextBox" HorizontalAlignment="Left" Margin="109,318,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="93"/>
+        <Button x:Name="placeCustomBetButton" Content="Place Bet" Width="94" HorizontalAlignment="Left" Margin="506,293,0,0" VerticalAlignment="Top" Click="placeCustomBetButton_Click" FontWeight="Bold"/>
         <Label x:Name="poolAmountstaticLabel" Content="Money in the pool :" HorizontalAlignment="Center" Margin="0,82,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="poolAmountTextBox" TextAlignment="Center" HorizontalAlignment="Center" Margin="0,105,0,0" TextWrapping="Wrap" IsEnabled="False" VerticalAlignment="Top" Width="113"/>
-        <Button x:Name="resetButton" Content="Reset" HorizontalAlignment="Center" Margin="0,282,0,0" VerticalAlignment="Top" Width="76" Click="resetButton_Click"/>
+        <Button x:Name="resetButton" Content="Reset" HorizontalAlignment="Center" Margin="0,222,0,0" VerticalAlignment="Top" Width="76" Click="resetButton_Click"/>
 
     </Grid>
 </Window>

@@ -23,11 +23,6 @@ namespace blackjackGame.Classes
             amount += amountToAdd;
         }
 
-        //public void RemoveFromBalance(double amountToRemove)
-        //{
-        //    amount -= amountToRemove;
-        //}
-
         public override string ToString()
         {
             return $"${Amount}";

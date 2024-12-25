@@ -21,226 +21,75 @@ namespace blackjackGame
         private Card card = new Card();
         private Bankroll bankroll;
         private Pool pool = new Pool();
+
+        private const int blackjack = 21;
+        private const double startBalance = 500, betButton1Value =20, betButton2Value = 50, betButton3Value = 100, betButton4Value = 200;
         public MainWindow()
         {
             InitializeComponent();
-            hitButton.IsEnabled = false;
-            standButton.IsEnabled = false;
-            twentyButton.IsEnabled = false;
-            fiftyButton.IsEnabled = false;
-            hundredButton.IsEnabled = false;
-            twoHundredButton.IsEnabled = false;
-            placeCustomBetButton.IsEnabled = false;
-
-            bankroll = new Bankroll(500);
+            EnableAllButtons(false);
+            bankroll = new Bankroll(startBalance);
         }
 
         private void startButton_Click(object sender, RoutedEventArgs e)
         {
-            //standButton.IsEnabled = true;
-            twentyButton.IsEnabled = true;
-            fiftyButton.IsEnabled = true;
-            hundredButton.IsEnabled = true;
-            twoHundredButton.IsEnabled = true;
-            placeCustomBetButton.IsEnabled = true;
             startButton.IsEnabled = false;
-
-            playerCardsListBox.Items.Clear();
-            dealerCardsListBox.Items.Clear();
-
-            playerScore = 0;
-            dealerScore = 0;
-
-            playerScoreLabel.Content = playerScore.ToString();
-            dealerScorelabel.Content = dealerScore.ToString();
-
+            EnableBetButtons(true);
+            ResetScores();
             card.ClearUsedCards();
-
-            bankrollTextBox.Text = bankroll.ToString();
-            poolAmountTextBox.Text = pool.ToString();
+            UpdateUI();
         }
 
         private void hitButton_Click(object sender, RoutedEventArgs e)
         {
-            twentyButton.IsEnabled = false;
-            fiftyButton.IsEnabled = false;
-            hundredButton.IsEnabled = false;
-            twoHundredButton.IsEnabled = false;
-            placeCustomBetButton.IsEnabled = false;
-
             card.CreateCard();
-            //Check if card is an ace
-            if (card.Value == 0)
-            {
-                MessageBoxResult result = MessageBox.Show($"You have drawn an {card.ToString()}. " +
-                    $"Do you want to set the ace value to 11?\n(If not, the value will be set to 1)",
-                    "Ace value", MessageBoxButton.YesNo,MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
-                {
-                    card.Value = 11;
-                }
-                else
-                {
-                    card.Value = 1;
-                }
-            }
+            CheckIfCardIsAceAndSelectValue();
             playerScore += card.Value;
-            playerScoreLabel.Content = Convert.ToString(playerScore);
             playerCardsListBox.Items.Add(card.ToString());
-            if (IsScoreAbove21(playerScore))
-            {
-                PlayerLostGame();
-            }
-            
-        }
-
-        private bool IsScoreAbove21(int score)
-        {
-            if (score > 21)
-            {
-                return true;
-            }
-            else { return false; }
-        }
-
-        private void PlayerLostGame()
-        {
-            gameResultTextBlock.Text = "YOU LOSE...";
-            pool.Amount = 0;
-            hitButton.IsEnabled = false;
-            standButton.IsEnabled = false;
-            startButton.IsEnabled = true;
             UpdateUI();
-            if (bankroll.Balance == 0)
-            {
-                MessageBox.Show("You do not have enough credit to continue playing. \nThe game will be reset", "Not enough credit", MessageBoxButton.OK, MessageBoxImage.Warning);
-                bankroll.Balance = 500;
-            }
-        }
-
-        private void PlayerWonGame()
-        {
-            double wonAmount = pool.Amount;
-            if(playerScore == 21)
-            {
-                gameResultTextBlock.Text = "BLACKJACK!";
-                bankroll.AddToBalance(wonAmount*2.5);
-            }
-            else
-            {
-                gameResultTextBlock.Text = "YOU WIN!";
-                bankroll.AddToBalance(wonAmount * 2);
-            }
-            pool.Amount = 0;
-            hitButton.IsEnabled = false;
-            standButton.IsEnabled = false;
-            startButton.IsEnabled = true;
-            UpdateUI();
-        }
-
-        private void GameEndsInTie()
-        {
-            gameResultTextBlock.Text = "IT'S A TIE";
-            hitButton.IsEnabled = false;
-            standButton.IsEnabled = false;
-            startButton.IsEnabled = true;
+            CheckGameStatus();
         }
 
         private void standButton_Click(object sender, RoutedEventArgs e)
         {
             hitButton.IsEnabled = false;
-
-            while (dealerScore <17)
+            while (dealerScore < 17)
             {
                 card.CreateCard();
-                if (card.Value == 0)
-                {
-                    if(dealerScore + 11 <= 21)
-                    {
-                        card.Value = 11;
-                    }
-                    else
-                    {
-                        card.Value = 1;
-                    }
-                }
+                CheckIfCardIsAceAndSelectValue();
                 dealerScore += card.Value;
-                dealerScorelabel.Content = Convert.ToString(dealerScore);
                 dealerCardsListBox.Items.Add(card.ToString());
-
+                UpdateUI();
             }
-            if (IsScoreAbove21(dealerScore))
+            UpdateUI();
+            CheckGameStatus();
+            if (bankroll.Balance == 0)
             {
-                PlayerWonGame();
-            }
-            else if (dealerScore < playerScore)
-            {
-                PlayerWonGame();
-            }
-            else if (dealerScore == playerScore)
-            {
-                GameEndsInTie();
-            }
-            else
-            {
-                PlayerLostGame();
+                MessageBox.Show("You do not have enough credit to continue playing. \nThe game will be reset", "Not enough credit", MessageBoxButton.OK, MessageBoxImage.Warning);
+                bankroll.Balance = startBalance;
+                pool.Amount = 0;
             }
         }
 
         private void twentyButton_Click(object sender, RoutedEventArgs e)
         {
-            if (CheckIfBankrollIsSufficient(20))
-            {
-                bankroll.RemoveFromBalance(20);
-                pool.AddToBalance(20);
-                UpdateUI();
-            }
-            else
-            {
-                MessageBox.Show("You have insufficient credits in your bankroll!", "Insufficient bankroll", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            }
+            CheckIfBankrollIsSufficient(betButton1Value);
+
         }
 
         private void fiftyButton_Click(object sender, RoutedEventArgs e)
         {
-            if (CheckIfBankrollIsSufficient(50))
-            {
-                bankroll.RemoveFromBalance(50);
-                pool.AddToBalance(50);
-                UpdateUI();
-            }
-            else
-            {
-                MessageBox.Show("You have insufficient credits in your bankroll!", "Insufficient bankroll", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            }
+            CheckIfBankrollIsSufficient(betButton2Value);
         }
 
         private void hundredButton_Click(object sender, RoutedEventArgs e)
         {
-            if (CheckIfBankrollIsSufficient(100))
-            {
-                bankroll.RemoveFromBalance(100);
-                pool.AddToBalance(100);
-                UpdateUI();
-            }
-            else
-            {
-                MessageBox.Show("You have insufficient credits in your bankroll!", "Insufficient bankroll", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            }
+            CheckIfBankrollIsSufficient(betButton3Value);
         }
 
         private void twoHundredButton_Click(object sender, RoutedEventArgs e)
         {
-            if (CheckIfBankrollIsSufficient(200))
-            {
-                bankroll.RemoveFromBalance(200);
-                pool.AddToBalance(200);
-                UpdateUI();
-            }
-            else
-            {
-                MessageBox.Show("You have insufficient credits in your bankroll!", "Insufficient bankroll", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-            }
+            CheckIfBankrollIsSufficient(betButton4Value);
         }
 
         private void placeCustomBetButton_Click(object sender, RoutedEventArgs e)
@@ -250,31 +99,32 @@ namespace blackjackGame
                 string input = customBetAmountTextBox.Text;
                 if (string.IsNullOrEmpty(input))
                 {
-                    UpdateUI();
-                    hitButton.IsEnabled = true;
-                    standButton.IsEnabled = true;
-                }
-                else
-                {
-                    double customAmount = Convert.ToDouble(input);
-                    if (CheckIfBankrollIsSufficient(customAmount))
+                    if(pool.Amount != 0)
                     {
-                        bankroll.RemoveFromBalance(customAmount);
-                        pool.AddToBalance(customAmount);
                         UpdateUI();
-                        hitButton.IsEnabled = true;
-                        standButton.IsEnabled = true;
+                        EnableHitAndStandButtons(true);
+                        EnableBetButtons(false);
                     }
                     else
                     {
-                        MessageBox.Show("You have insufficient credits in your bankroll!", "Insufficient bankroll", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        MessageBox.Show("You need to place a bet before playing!", "No bet placed", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
+                else
+                {
+                    double amount = Convert.ToDouble(input);
+                    if(amount <= bankroll.Balance)
+                    {
+                        EnableHitAndStandButtons(true);
+                        EnableBetButtons(false);
+                    }
+                    CheckIfBankrollIsSufficient(amount);
+                }
+                customBetAmountTextBox.Text = string.Empty;
             }
-            catch (Exception error)
+            catch (Exception)
             {
-
-                MessageBox.Show(error.Message);
+                MessageBox.Show("Please enter an amount!", "Incorrect input", MessageBoxButton.OK, MessageBoxImage.Error);
             }
            
         }
@@ -284,6 +134,28 @@ namespace blackjackGame
             System.Windows.Application.Current.Shutdown();
         }
 
+        private void resetButton_Click(object sender, RoutedEventArgs e)
+        {
+            bankroll.Balance = startBalance;
+            pool.Amount = 0;
+            ResetScores();
+            UpdateUI();
+        }
+
+        //functions
+        private void EnableHitAndStandButtons(bool trueOrFalse)
+        {
+            if (trueOrFalse)
+            {
+                hitButton.IsEnabled = true;
+                standButton.IsEnabled = true;
+            }
+            else
+            {
+                hitButton.IsEnabled = false;
+                standButton.IsEnabled = false;
+            }
+        }
         private void UpdateUI()
         {
             bankrollTextBox.Text = bankroll.ToString();
@@ -291,29 +163,116 @@ namespace blackjackGame
             playerScoreLabel.Content = playerScore;
             dealerScorelabel.Content = dealerScore;
         }
-
-        private void resetButton_Click(object sender, RoutedEventArgs e)
+        private void EnableAllButtons(bool yesOrNo)
         {
-            bankroll.Balance = 500;
-            pool.Amount = 0;
-            playerScore = 0;
-            dealerScore = 0;
-            dealerCardsListBox.Items.Clear();
-            playerCardsListBox.Items.Clear();
-            poolAmountTextBox.Text = string.Empty;
-            gameResultTextBlock.Text = string.Empty;
-            UpdateUI();
-        }
-
-        private bool CheckIfBankrollIsSufficient(double amount)
-        {
-            if(bankroll.Balance - amount < 0)
+            if (yesOrNo)
             {
-                return false;
+                EnableBetButtons(true);
+                EnableHitAndStandButtons(true);
             }
             else
             {
-                return true;
+                EnableBetButtons(false);
+                EnableHitAndStandButtons(false);
+            }
+        }
+        public void EnableBetButtons(bool trueOrFalse)
+        {
+            if (trueOrFalse)
+            {
+                twentyButton.IsEnabled = true;
+                fiftyButton.IsEnabled = true;
+                hundredButton.IsEnabled = true;
+                twoHundredButton.IsEnabled = true;
+                placeCustomBetButton.IsEnabled = true;
+                customBetAmountTextBox.IsEnabled = true;
+            }
+            else
+            {
+                twentyButton.IsEnabled = false;
+                fiftyButton.IsEnabled = false;
+                hundredButton.IsEnabled = false;
+                twoHundredButton.IsEnabled = false;
+                placeCustomBetButton.IsEnabled = false;
+                customBetAmountTextBox.IsEnabled = false;
+            }
+        }
+        public void ResetScores()
+        {
+            playerCardsListBox.Items.Clear();
+            dealerCardsListBox.Items.Clear();
+            gameResultTextBlock.Text = string.Empty;
+            playerScore = 0;
+            dealerScore = 0;
+        }
+        private void CheckIfCardIsAceAndSelectValue()
+        {
+            if (card.Value == 11)
+            {
+                if (playerScore + 11 > blackjack)
+                {
+                    card.Value = 1;
+                }
+            }
+        }
+        private void CheckGameStatus()
+        {
+            if(dealerScore == 0)
+            {
+                if(playerScore>blackjack)
+                {
+                    EnableHitAndStandButtons(false);
+                    startButton.IsEnabled = true;
+                    gameResultTextBlock.Text = "YOU LOST";
+                    pool.Amount = 0;
+                    UpdateUI();
+                }
+            }
+            else if (dealerScore <= 21 && dealerScore > playerScore)
+            {
+                EnableHitAndStandButtons(false);
+                startButton.IsEnabled = true;
+                gameResultTextBlock.Text = "YOU LOST";
+                pool.Amount = 0;
+                UpdateUI();
+            }
+            else if (dealerScore > blackjack || dealerScore < playerScore)
+            {
+                double wonAmount = pool.Amount;
+                if (playerScore == blackjack)
+                {
+                    gameResultTextBlock.Text = "BLACKJACK!";
+                    bankroll.AddToBalance(wonAmount * 2.5);
+                }
+                else
+                {
+                    gameResultTextBlock.Text = "YOU WIN!";
+                    bankroll.AddToBalance(wonAmount * 2);
+                }
+                pool.Amount = 0;
+                EnableHitAndStandButtons(false);
+                startButton.IsEnabled = true;
+                UpdateUI();
+            }
+            else if (playerScore == dealerScore)
+            {
+                EnableHitAndStandButtons(false);
+                startButton.IsEnabled = true;
+                gameResultTextBlock.Text = "TIE";
+                UpdateUI();
+            }
+        }
+        private void CheckIfBankrollIsSufficient(double amount)
+        {
+            if(bankroll.Balance - amount < 0)
+            {
+                MessageBox.Show("You have insufficient credits in your bankroll!", "Insufficient bankroll", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            else
+            {
+                bankroll.RemoveFromBalance(amount);
+                pool.AddToBalance(amount);
+                UpdateUI();
             }
         }
     }

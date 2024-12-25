@@ -57,7 +57,7 @@ namespace blackjackGame.Classes
             switch (cardValue)
             {
                 case 1:
-                    value = 0;
+                    value = 11;
                     name = "Ace";
                     break;
                 case 11:

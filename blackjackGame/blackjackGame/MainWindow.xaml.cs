@@ -34,6 +34,24 @@ namespace blackjackGame
         private void startButton_Click(object sender, RoutedEventArgs e)
         {
             startButton.IsEnabled = false;
+            int difficulty = Convert.ToInt32(difficultySlider.Value);
+            switch (difficulty)
+            {
+                case 1:
+                    difficulty = 1;
+                    break;  
+                case 2:
+                    difficulty = 2;
+                    break;
+                case 3:
+                    difficulty+=1;
+                    break;
+                default:
+                    difficulty = 1;
+                    break;
+            }
+            card.Difficulty = difficulty;
+            difficultySlider.IsEnabled = false;
             EnableBetButtons(true);
             ResetScores();
             card.ClearUsedCards();
@@ -143,6 +161,12 @@ namespace blackjackGame
             pool.Amount = 0;
             ResetScores();
             UpdateUI();
+            difficultySlider.IsEnabled = true;
+            startButton.IsEnabled = true;
+            EnableAllButtons(false);
+        }
+        private void difficultySlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
         }
 
         //functions
@@ -153,6 +177,7 @@ namespace blackjackGame
                 MessageBox.Show("You do not have enough credit to continue playing. \nThe game will be reset", "Not enough credit", MessageBoxButton.OK, MessageBoxImage.Warning);
                 bankroll.Balance = startBalance;
                 pool.Amount = 0;
+                difficultySlider.IsEnabled = true;
             }
         }
         private void EnableHitAndStandButtons(bool trueOrFalse)

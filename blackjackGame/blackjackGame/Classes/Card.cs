@@ -11,6 +11,7 @@ namespace blackjackGame.Classes
         private string suit;
         private int value;
         private string name;
+        private int difficulty = 1;
         private List<String> usedCards = new List<string>();
 
         public Card()
@@ -28,6 +29,12 @@ namespace blackjackGame.Classes
             get { return value; }
             set { this.value = value; }
         }
+
+        public int Difficulty
+        {
+            set { difficulty = value; }
+        }
+
         public string Name 
         { 
             get { return name; } 
@@ -96,7 +103,20 @@ namespace blackjackGame.Classes
         {
             if (usedCards.Contains(card))
             {
-                return false;
+                int count = 0;
+                foreach(string cardName in usedCards)
+                {
+                    if (cardName != null && cardName == card) count++;
+                }
+                if (count == difficulty)
+                {
+                    return false;
+                }
+                else
+                {
+                    usedCards.Add(card);
+                    return true;
+                }
             }
             else
             {

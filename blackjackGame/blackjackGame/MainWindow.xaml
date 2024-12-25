@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="Blackjack" Height="400" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        <ListBox x:Name="playerCardsListBox" IsEnabled="False" Margin="10,44,640,192"/>
-        <ListBox x:Name="dealerCardsListBox" IsEnabled="False" Margin="640,49,10,192"/>
+        <ListBox x:Name="playerCardsListBox" Margin="10,44,640,192"/>
+        <ListBox x:Name="dealerCardsListBox" Margin="640,49,10,192"/>
         <Label x:Name="staticPlayerLabel" Content="Player" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" Width="150" FontWeight="Bold"/>
         <Label x:Name="staticDealerLabel" Content="Dealer" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="640,18,0,0" VerticalAlignment="Top" Width="150" FontWeight="Bold"/>
         <TextBlock x:Name="gameResultTextBlock" HorizontalAlignment="Center" Margin="0,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontWeight="Bold" FontSize="24"/>
@@ -34,7 +34,7 @@
         <TextBox x:Name="poolAmountTextBox" TextAlignment="Center" HorizontalAlignment="Center" Margin="0,105,0,0" TextWrapping="Wrap" IsEnabled="False" VerticalAlignment="Top" Width="113"/>
         <Button x:Name="resetButton" Content="Reset" HorizontalAlignment="Center" Margin="0,222,0,0" VerticalAlignment="Top" Width="76" Click="resetButton_Click"/>
         <Label x:Name="packsStaticLabel" Content="Difficulty" HorizontalAlignment="Left" Margin="454,144,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Slider x:Name="difficultySlider" Minimum="1" Maximum="3"   TickFrequency="1" IsSnapToTickEnabled="True" Orientation="Vertical" HorizontalAlignment="Left" Margin="463,178,0,0" VerticalAlignment="Top" Width="19" Height="71" RenderTransformOrigin="0.5,0.5">
+        <Slider x:Name="difficultySlider" Minimum="1" Maximum="3"   TickFrequency="1" IsSnapToTickEnabled="True" Orientation="Vertical" HorizontalAlignment="Left" Margin="463,178,0,0" VerticalAlignment="Top" Width="19" Height="71" RenderTransformOrigin="0.5,0.5" ValueChanged="difficultySlider_ValueChanged">
             <Slider.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

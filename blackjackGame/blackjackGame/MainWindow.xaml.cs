@@ -63,12 +63,7 @@ namespace blackjackGame
             }
             UpdateUI();
             CheckGameStatus();
-            if (bankroll.Balance == 0)
-            {
-                MessageBox.Show("You do not have enough credit to continue playing. \nThe game will be reset", "Not enough credit", MessageBoxButton.OK, MessageBoxImage.Warning);
-                bankroll.Balance = startBalance;
-                pool.Amount = 0;
-            }
+            CheckEndGameBankroll();
         }
 
         private void twentyButton_Click(object sender, RoutedEventArgs e)
@@ -143,6 +138,15 @@ namespace blackjackGame
         }
 
         //functions
+        private void CheckEndGameBankroll()
+        {
+            if (bankroll.Balance == 0)
+            {
+                MessageBox.Show("You do not have enough credit to continue playing. \nThe game will be reset", "Not enough credit", MessageBoxButton.OK, MessageBoxImage.Warning);
+                bankroll.Balance = startBalance;
+                pool.Amount = 0;
+            }
+        }
         private void EnableHitAndStandButtons(bool trueOrFalse)
         {
             if (trueOrFalse)
@@ -226,6 +230,7 @@ namespace blackjackGame
                     gameResultTextBlock.Text = "YOU LOST";
                     pool.Amount = 0;
                     UpdateUI();
+                    CheckEndGameBankroll();
                 }
             }
             else if (dealerScore <= 21 && dealerScore > playerScore)

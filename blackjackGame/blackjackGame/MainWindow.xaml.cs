@@ -108,12 +108,20 @@ namespace blackjackGame
                 else
                 {
                     double amount = Convert.ToDouble(input);
-                    if(amount <= bankroll.Balance)
+                    if (amount <= 0)
                     {
-                        EnableHitAndStandButtons(true);
-                        EnableBetButtons(false);
+                        MessageBox.Show("The bet must be more than 0!", "Incorrect bet", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                    CheckIfBankrollIsSufficient(amount);
+                    else
+                    {
+                        if (amount <= bankroll.Balance)
+                        {
+                            EnableHitAndStandButtons(true);
+                            EnableBetButtons(false);
+                        }
+                        CheckIfBankrollIsSufficient(amount);
+                    }
+                    
                 }
                 customBetAmountTextBox.Text = string.Empty;
             }
